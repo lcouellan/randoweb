@@ -1,7 +1,7 @@
 # Randoweb
 
-Randoweb is my first project using Symfony.
-Randoweb was my topic in a supervised project for my first year in Master DNR2I.
+Randoweb is my first project using Symfony. This is the clone of a private repository from the University server.
+Randoweb was my topic in a supervised project for my first year in Master DNR2I. 
 
 Thanks to this website you can find hikings around you using the GPS Location of your laptop / phone / Tablet. 
 You can also create a new hiking thanks to GPX File. A marker is created on the map thanks to the metadata in the file you just uploaded. A topic / comment system is also implemented for each hikings. 
@@ -9,7 +9,7 @@ You can also create a new hiking thanks to GPX File. A marker is created on the 
 ![](media/screenshot.png)
 
 
-### Installing
+## Installing
 
 Clone the repository
 
