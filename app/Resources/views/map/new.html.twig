@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{%  block body %}
+    <h1 class="text-center">Créer une randonnée</h1>
+    {{  form_start(form,{ 'attr': {'class': 'create_form'}}) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.distance) }}
+        {{ form_row(form.time) }}
+        {{ form_row(form.difficulty) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.trace) }}
+        {{ form_row(form.description) }}
+
+        <button type="submit" class="btn btn-primary">Créer</button>
+        {{  form_end(form) }}
+{%  endblock body %}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    <header>
+        <img src="{{asset('images/header.png')}}" alt="header"/>
+        <div class="logo-container">
+            <a href="/"><img src="{{ asset('images/logo.png') }}" alt="logo"/></a>
+        </div>
+        <div class="login-container">
+            <div class="container-fluid">
+                    <span id="description-site">
+                        RandoNear est le site web pour vos randonnées. Il propose toutes les futures ballades autour de vous ! Vous pouvez aussi proposer vos parcours déjà enregistrés sur votre téléphone.
+                    </span>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="buttons">
+                        <a class="btn btn-danger" href="/user/{{  app.user.username }}">Voir mon profil</a>
+                        <a class="btn btn-primary" href="/map/new">Créer une randonnée</a>
+                    </div>
+                {% else %}
+                    <div class="buttons">
+                        <a class="btn btn-danger" href="/login">Se connecter</a>
+                        <a class="btn btn-primary" href="/register">S'inscrire</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+{%  block body %}
+    <div class="col-sm-6">
+        <div id="map" style="width: 500px; height: 500px"></div>
+    </div>
+    <div class="col-sm-6">
+        {% for randonnee in randonnees|slice(0, 4) %}
+            <div class="randos-accueil">
+                <div class="col-sm-6 img-rando">
+                    <img src="{{ asset('images/randonnees/') ~ randonnee.image }}"/>
+                </div>
+                <ul class="col-sm-6 info-rando">
+                    <h4>{{randonnee.name}}</h4>
+                    <li>Distance : {{ randonnee.distance }} kms</li>
+                    <li>Temps : {{ randonnee.time }} minutes</li>
+                    <li>Difficulté : {{ randonnee.difficulty }}</li>
+                    <a href="map/{{ randonnee.id }}">Voir la randonnée</a>
+                </ul>
+            </div>
+            <hr/>
+        {% endfor %}
+    </div>
+    {% block javascripts %}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsZoGmPF1XmS5cqDN0QIQ-CEW3lgAWY6E&signed_in=true&callback="
+                type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+    {% endblock %}
+{% endblock %}

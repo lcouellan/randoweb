@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{%  block body %}
+    <h1 class="text-center">Créer une randonnée</h1>
+    {{  form_start(form) }}
+    <div class="col-sm-3">
+    {{ form_row(form.name) }}
+    {{ form_row(form.difficulty) }}
+    </div>
+    <div class="col-sm-3">
+    {{ form_row(form.distanceMin) }}
+    {{ form_row(form.distanceMax) }}
+    </div>
+    <div class="col-sm-3">
+    {{ form_row(form.timeMin) }}
+    {{ form_row(form.timeMax) }}
+    </div>
+    <div class="col-sm-3">
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+    </div>
+    {{  form_end(form) }}
+    <div class="col-sm-12">
+        <div class="showAllRando">
+        {% if randonnees %}
+            {% for randonnee in randonnees %}
+                <a href="map/{{ randonnee.id }}"><span class="glyphicon glyphicon-leaf"></span>{{ randonnee.name }}</a>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="{{ asset('js/json.js') }}"></script>
+    {% endblock %}
+{%  endblock body %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}RandoNear{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
+        <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:300,400' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    {% endblock %}
+</head>
+    <body class="page-{{ app.request.requestURI|slice(1) }}">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">RandoNear</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="{% if app.request.requestURI == '/' %}active{% endif %}"><a href="/">Accueil</a></li>
+                <li class="{% if app.request.requestURI == '/search' %}active{% endif %}"><a href="/search">Rechercher une randonnée</a></li>
+                <li class="{% if app.request.requestURI == '/map/new' %}active{% endif %}"><a href="/map/new">Créer une randonnée</a></li>
+                <li class="{% if app.request.requestURI == '#' %}active{% endif %}"><a href="/aPropos">A Propos</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li>
+                        <a href="/user/{{  app.user.username }}">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></li>
+                    <li>
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a></li>
+                {% else %}
+                    <li><a href="/register"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
+                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>Se connecter</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% block header %}
+    {% endblock %}
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    <footer class="footer navbar navbar-inverse"><p class="text-center">@2016 Lénaïc Couëllan - Tous droits réservés</p></footer>
+    </body>
+</html>
